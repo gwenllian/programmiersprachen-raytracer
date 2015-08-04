@@ -64,6 +64,8 @@ Scene Sdf_loader::loadScene(std::file) const{
 					string word = "";
 					//wird i richtig erhöht??
 
+					// http://www.willemer.de/informatik/cpp/string.htm erase auf den anfang benutzen, sodass man i nicht zählen braucht?
+
 					//Name:
 					word = getWord()
 					i += word.length();
@@ -164,9 +166,6 @@ Scene Sdf_loader::loadScene(std::file) const{
 		 		
 	 		}	
  		}
- 	
- 		
-
 
  	}
 
