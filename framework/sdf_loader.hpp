@@ -20,6 +20,7 @@ public:
 	void load_material(std::string file, std::map<std::string, Material>& material);
 	std::string get_file() const;
 
+	string getWord();
 
 private:
 	std::string file_;

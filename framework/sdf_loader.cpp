@@ -11,6 +11,15 @@ Sdf_loader::Sdf_loader(std::string file): file_{file} {}
 Sdf_loader::Sdf_loader():file_{""} {}
 Sdf_loader::~Sdf_loader(){}
 
+string Sdf_loader::getWord(){
+	std::string temp = "";
+	while (line[i]!=' '){
+		temp += line[i];
+		++i;
+	}
+	return temp;
+}
+
 Scene Sdf_loader::loadScene(std::file) const{
 
 	ifstream datei(“mat.txt“, ios::in);
@@ -21,7 +30,7 @@ Scene Sdf_loader::loadScene(std::file) const{
  			//compare(pos,leng,string)
  			if (line.compare(0,1,"#") == 0)//Kommentarzeilen werden ignoriert
 	 		{
-	 			//do nothing BRAUCHEN WIR DAS??
+	 			//do nothing BRAUCHEN WIR DAS??  wahrscheinlich nicht, wenn die else ifs nicht zutreffen sind, macht es eh einfach nichts
 	 		}
 	 		else if (line.compare(0,6,"camera") == 0)//Kamera
 	 		{
@@ -35,7 +44,110 @@ Scene Sdf_loader::loadScene(std::file) const{
 	 		{
 	 			if (line.compare(7,8,"material") == 0)//Materials für Shapes
 		 		{
-		 			/* code */
+		 			std::string name;
+
+					float ka_r;
+					float ka_g;
+					float ka_b;
+
+					float kd_r;
+					float kd_g;
+					float kd_b;
+
+					float ks_r;
+					float ks_g;
+					float ks_b;
+
+					float m;
+
+					int i = 15;
+					string word = "";
+					//wird i richtig erhöht??
+
+					//Name:
+					word = getWord()
+					i += word.length();
+					name = word;
+					temp.clear();
+					word.clear(); 
+
+					//Farben:
+
+					//ka
+					word = getWord();
+					i += word.length();
+					ka_r = stod(word);
+					temp.clear();
+					word.clear();
+
+					word = getWord();
+					i += word.length();
+					ka_g = stod(word);
+					temp.clear();
+					word.clear(); 
+
+					word = getWord();
+					i += word.length();
+					ka_b = stod(word);
+					temp.clear();
+					word.clear(); 
+
+
+					//kd
+					word = getWord();
+					i += word.length();
+					kd_r = stod(word);
+					temp.clear();
+					word.clear(); 
+
+					word = getWord();
+					i += word.length();
+					kd_g = stod(word);
+					temp.clear();
+					word.clear(); 
+
+					word = getWord();
+					i += word.length();
+					kd_b = stod(word);
+					temp.clear();
+					word.clear(); 
+
+
+					//ks
+					word = getWord();
+					i += word.length();
+					ks_r = stod(word);
+					temp.clear();
+					word.clear(); 
+
+					word = getWord();
+					i += word.length();
+					ks_g = stod(word);
+					temp.clear();
+					word.clear(); 
+
+					word = getWord();
+					i += word.length();
+					ks_b = stod(word);
+					temp.clear();
+					word.clear(); 
+
+					//kürzer?? methode get farbe oder so?
+					
+					Color ka{ka_r, ka_g, ka_b};
+					Color kd{kd_r, kd_g, kd_b};
+					Color ks{ks_r, ks_g, ks_b};
+
+
+					//m:
+					word = getWord();
+					i += word.length();
+					m = stod(word);
+					temp.clear();
+					word.clear(); 
+
+					Material mat{name, ka, kd, ks, m};
+					material[name] = mat;
 		 		}
 		 		else if (line.compare(7,5,"light") == 0)//Lichquellen
 		 		{
